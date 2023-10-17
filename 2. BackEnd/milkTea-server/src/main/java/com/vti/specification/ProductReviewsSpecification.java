@@ -1,7 +1,6 @@
 package com.vti.specification;
 
 import com.vti.entity.ProductReviews;
-import com.vti.entity.ProductReviews_;
 import com.vti.form.ProductReviewsFilterForm;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.StringUtils;
@@ -25,7 +24,7 @@ public class ProductReviewsSpecification {
             if (!StringUtils.hasText(search)) {
                 return null;
             }
-            return builder.like(root.get(ProductReviews_.reviewText), "%" + search.trim() + "%");
+            return builder.like(root.get("reviewText"), "%" + search.trim() + "%");
         };
     }
 
@@ -36,7 +35,7 @@ public class ProductReviewsSpecification {
             if (minRatting == null) {
                 return null;
             }
-            return builder.greaterThanOrEqualTo(root.get(ProductReviews_.ratting),minRatting);
+            return builder.greaterThanOrEqualTo(root.get("ratting"),minRatting);
         };
     }
 
@@ -45,7 +44,7 @@ public class ProductReviewsSpecification {
             if (maxRatting == null) {
                 return null;
             }
-            return builder.lessThanOrEqualTo(root.get(ProductReviews_.ratting),maxRatting);
+            return builder.lessThanOrEqualTo(root.get("ratting"),maxRatting);
         };
     }
     private static Specification<ProductReviews> hasReviewDateGreaterThanOrEqualTo ( LocalDate minReviewDate ) {
@@ -53,7 +52,7 @@ public class ProductReviewsSpecification {
             if (minReviewDate == null) {
                 return null;
             }
-            return builder.greaterThanOrEqualTo(root.get(ProductReviews_.reviewDate).as(LocalDate.class),minReviewDate);
+            return builder.greaterThanOrEqualTo(root.get("reviewDate").as(LocalDate.class),minReviewDate);
         };
     }
 
@@ -62,7 +61,7 @@ public class ProductReviewsSpecification {
             if (maxReviewDate == null) {
                 return null;
             }
-            return builder.lessThanOrEqualTo(root.get(ProductReviews_.reviewDate).as(LocalDate.class),maxReviewDate);
+            return builder.lessThanOrEqualTo(root.get("reviewDate").as(LocalDate.class),maxReviewDate);
         };
     }
 }
